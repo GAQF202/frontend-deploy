@@ -17,6 +17,40 @@ nav li{
   margin: 0 20px;
 }
 
+.h1-last-title{
+  color: rgb(44, 43, 42);
+  text-align: center;
+  position: relative;
+  top: -540px;
+  left: 10px;
+}
+
+@keyframes saltar {
+  from{
+    transform: translatey(0);
+    color: #f57344;
+  }
+  to{
+    transform: translatey(6px);
+  }
+}
+
+.h1-top{
+  color: rgb(44, 43, 42);
+  animation: saltar 1.5s infinite;
+  text-align: center;
+  position: relative;
+  right: 465px;
+}
+
+.h1-all-title{
+  color: rgb(44, 43, 42);
+  text-align: center;
+  position: relative;
+  left: 465px;
+  top: -1060px;
+}
+
 nav .button-nav{
   font-size: 15px;
   text-transform: uppercase;
@@ -29,6 +63,72 @@ nav .button-nav{
   font-weight: bold;
 }
 
+
 nav .button-nav:hover{
   box-shadow: 0 10px #e94a00;
+}
+
+.div-last-games{
+  position: relative;
+  margin: 30px;
+  padding: 3px;
+  width: 450px;
+  height: 400px;
+  left: 400px;
+  top: -541px;
+  /*border: solid 3px rgb(246, 116, 35);*/
+  overflow: scroll;
+}
+
+.div-bestplayers{
+  margin: 30px;
+  padding: 3px;
+  width: 300px;
+  height: 400px;
+  /*border: solid 3px rgb(246, 116, 35);*/
+  overflow: scroll;
+}
+
+.div-all-players{
+  position: relative;
+  padding: 3px;
+  width: 300px;
+  height: 400px;
+  left: 960px;
+  top: -1036px;
+  /*border: solid 3px rgb(246, 116, 35);*/
+  overflow: scroll;
+}
+
+
+
+table{
+  background-color: rgb(234, 238, 235);
+  text-align: center;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td{
+  padding: 10px;
+}
+
+thead{
+  background-color: rgb(249, 158, 31);
+  color: rgb(37, 31, 31);
+  border-bottom: solid 5px;
+}
+
+tr:nth-child(even){
+  background-color: #ddd;
+}
+
+tr:hover{
+  background-color: #f3ac6a;
+}
+
+.div-selector-player{
+  width: 10px;
+  height: 10px;
+  border: solid 1px black;
 }
