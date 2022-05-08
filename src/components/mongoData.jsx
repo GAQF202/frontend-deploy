@@ -2,6 +2,8 @@ import React, { useEffect, useState,/* setState */} from "react";
 import 'c3/c3.css';
 import c3 from "c3";  
 
+import '../App.css';
+
 function MongoData() {
 
   const [logs,setLogs] = useState([]);
@@ -9,14 +11,16 @@ function MongoData() {
   // CONSTANTES PARA GUARDAR A LOS SUSCRIBERS DE GO 
   const [sus1,setSus1] = useState(["Kafka"]);
   const [sus2,setSus2] = useState(["RabbitMQ"]);
-
+  var env = process.env.REACT_APP_RUST_HOST || 'localhost'
   useEffect(()=>{
     setInterval(()=>{
-      fetch("http://localhost:8000/hello",{method:"GET"})
+      //fetch("http://localhost:8000/hello",{method:"GET"})
+      //fetch("http:"+env+":8000/",{method:"GET"})
+      fetch("http://34.123.117.181:8000/hello")
       .then((data)=>data.json())
       .then((json)=>{
         setLogs(json);
-        //console.log(logs)
+        console.log(logs)
       })
     },3000);
   },[])
@@ -71,8 +75,7 @@ function MongoData() {
   return (
     <div> 
         <div id="chart" />
-        <div> 
-        <h1>Showing data from mongodb</h1>
+        <div className="div-bestplayers-mongo"> 
         <table>
         <th className="th-titles">
           <td>Game ID</td>
@@ -98,7 +101,7 @@ function MongoData() {
         </table>
       </div>
 
-      <div>
+      <div className="div-last-games-mongo">
         <table>
           <th>
             <td>3 Más jugados</td>

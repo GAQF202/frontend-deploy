@@ -1,61 +1,27 @@
 import React, { useEffect, useState,/* setState */} from "react";
 import io from 'socket.io-client';
 
+//var node_env =  process.env.REACT_APP_NODEJS_HOST || 'localhost'
+//const socket = io("http://"+node_env+":8080")
+const socket = io("http://34.136.221.182:8080/")
+
 function RedisData() {
-  /*// VARIABLES PARA GUARDAR LOS MEJORES 10 Y ULTIMOS 10
-  const [topTen,setTopTen] = useState([]);
-  const [lastTen,setLastTen] = useState([]);
-
-  //const socket = io("https://sopes1-342703.uc.r.appspot.com/")
-  const socket = io("http://localhost:8080")
-  const [mensajes,setMensajes] = useState([]);
-
-  // TODOS LOS DATOS EN TIEMPO REAL
-  useEffect(()=>{
-  socket.on('message',mensaje => {
-      //setMensajes([...mensajes,mensaje])
-      setMensajes(mensaje)
-    })
-    return () => {socket.off()}
-  },[mensajes])
-  //console.log("Estooooo",mensajes)
-
-  // MEJORES JUGADORES
-  useEffect(()=>{
-    socket.on('playersRedis',mensaje => {
-      //setMensajes([...mensajes,mensaje])
-      setTopTen(mensaje)
-    })
-    return () => {socket.off()}
-  },[topTen])
-  //console.log("yeaa",topTen)
-
-  // ULTIMOS 10 JUEGOS
-  useEffect(()=>{
-    socket.on('lastRedis',mensaje => {
-      //setMensajes([...mensajes,mensaje])
-      setLastTen(mensaje)
-    })
-    return () => {socket.off()}
-  },[lastTen])
-
-  console.log("mimiiir",lastTen)*/
-
 
   // VARIABLES PARA GUARDAR LOS MEJORES 10 Y ULTIMOS 10
   const [topTen,setTopTen] = useState([]);
   const [lastTen,setLastTen] = useState([]);
   const [allPlayers,setAllPlayers] = useState([]);
-
-  const socket = io("https://sopes1-342703.uc.r.appspot.com/")
+  //var node_env =  process.env.REACT_APP_NODEJS_HOST || 'localhost'
+  //const socket = io("https://sopes1-342703.uc.r.appspot.com/")
   //const socket = io("http://localhost:8080")
-  //const socket = io("https://avian-safeguard-342704.uc.r.appspot.com")
+  //const socket = io("http//"+node_env+":8080")
   const [mensajes,setMensajes] = useState([]);
 
   // DATOS EN TIEMPO REAL
   useEffect(()=>{
     socket.on('message',mensaje => {
       setMensajes(JSON.parse(mensaje))
+      console.log(mensaje)
     })
     return () => {socket.off()}
   },[/*mensajes*/])
@@ -65,14 +31,21 @@ function RedisData() {
     socket.on('playersRedis',mensaje => {
       setTopTen(mensaje)
     })
-    socket.on('lastRedis',mensaje => {
+    /*socket.on('lastRedis',mensaje => {
       setLastTen(mensaje)
     })
     socket.on('allPlayersR',mensaje => {
       setAllPlayers(mensaje)
-    })
+    })*/
     return () => {socket.off()}
   },[/*topTen,lastTen*/])
+
+  useEffect(()=>{
+    socket.on('lastRedis',mensaje => {
+      setLastTen(mensaje)
+    })
+    return () => {socket.off()}
+  },[])
 
   //console.log(topTen)
   //console.log("estooo",lastTen)

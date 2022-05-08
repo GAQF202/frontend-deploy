@@ -1,13 +1,38 @@
-### STAGE 1: Build ###
-FROM node:16-alpine AS node
-WORKDIR /app
-COPY . .
-RUN yarn install
-ENV REACT_APP_BACKEND http://13.68.217.46:5000
-RUN yarn build
+#FROM nginx:1.21.6-alpine
+#FROM nginx:1.21.6-alpine
+#COPY nginx.conf /etc/nginx/nginx.conf
+#COPY ./build/ /usr/share/nginx/html
+#EXPOSE 4000
 
-### STAGE 2: Run ###
-FROM nginx:1.21.6-alpine
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=node /app/build/ /usr/share/nginx/html
-EXPOSE 3000
+
+
+#FROM node:latest
+
+#WORKDIR /home/nodejs/app
+#COPY . .
+#RUN npm install --production
+# start app
+#CMD ["npm", "start"]
+
+
+
+# pull official base image
+FROM node:13.12.0-alpine
+
+# set working directory
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install --silent
+RUN npm install react-scripts@3.4.1 -g --silent
+
+# add app
+COPY . ./
+
+# start app
+CMD ["npm", "start"]

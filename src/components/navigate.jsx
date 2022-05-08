@@ -7,17 +7,17 @@ function Navigate() {
           <nav>
             <ul>
               <li>
-                <Link className="button-nav" to="/mongo">
+                <Link className="button-nav" to="/front/mongo">
                   Reportes de Mongo
                 </Link>
               </li>
               <li>
-                <Link className="button-nav" to="/tidb">
+                <Link className="button-nav" to="/front/tidb">
                   Reportes de TIDB
                 </Link>
               </li>
               <li>
-                <Link className="button-nav" to="/redis">
+                <Link className="button-nav" to="/front/redis">
                   Reportes de Redis
                 </Link>
               </li>

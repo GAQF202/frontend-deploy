@@ -2,61 +2,73 @@ import React, { useEffect, useState,/* setState */} from "react";
 import io from 'socket.io-client';
 import '../App.css';
 
+  //const socket = io("http://localhost:8080")
+
+  //var node_env =  process.env.REACT_APP_NODEJS_HOST || 'localhost'
+  //const socket = io("http://"+node_env+":8080")
+  const socket = io("http://34.136.221.182:8080/")
+
 function TidbData() {
 
   // VARIABLES PARA GUARDAR LOS MEJORES 10 Y ULTIMOS 10
   const [topTen,setTopTen] = useState([]);
   const [lastTen,setLastTen] = useState([]);
   const [allPlayers,setAllPlayers] = useState([]);
-
+  //var node_env =  process.env.REACT_APP_NODEJS_HOST || 'localhost'
   //const socket = io("https://sopes1-342703.uc.r.appspot.com/")
-  //const socket = io("http://localhost:8080")
-  const socket = io("https://avian-safeguard-342704.uc.r.appspot.com")
+
+  //const socket = io("http//"+node_env+":8080")
   const [mensajes,setMensajes] = useState([]);
 
-  // DATOS EN TIEMPO REAL
-  useEffect(()=>{
-    socket.on('message1',mensaje => {
-      //setMensajes([...mensajes,mensaje])
-      setMensajes(JSON.parse(mensaje))
-      /*let myJson = JSON.parse(mensaje)
+  console.log(topTen, lastTen, allPlayers, mensajes)
 
-      for(let i=1; i<myJson.players+1; i++){
-        setAllPlayers(allPlayers=>[...allPlayers,{"name":"Jugador"+i,"state":"Jugador"+i==myJson.winner?"Ganador":"Perdedor","game":myJson.game_n}])
-      }*/
+  /*// DATOS EN TIEMPO REAL
+  useEffect(()=>{
+    setInterval(() => {
+      
+    socket.on('message1',mensaje => {
+      if (JSON.parse(mensaje).length !== mensajes.length)
+        setMensajes(JSON.parse(mensaje))
+      console.log(mensaje)
     })
-    return () => {socket.off()}
-  },[/*mensajes*/])
-  //console.log("Estooooo",mensajes)
+    //return () => {socket.off()}
+    }, 3000);
+  }, [mensajes.length])*/
+
 
   // MEJORES JUGADORES
   useEffect(()=>{
     socket.on('playersTidis',mensaje => {
-      //setMensajes([...mensajes,mensaje])
+    if(mensaje.length !== topTen.length)
+      console.log(mensaje)
       setTopTen(mensaje)
     })
-    socket.on('lastTidis',mensaje => {
+    /*socket.on('lastTidis',mensaje => {
+    if(mensaje.length !== lastTen.length)
       setLastTen(mensaje)
     })
     socket.on('allPlayersT',mensaje => {
+      if (mensaje.length !== allPlayers.length)
       setAllPlayers(mensaje)
-    })
+    })*/
     return () => {socket.off()}
-  },[/*topTen,lastTen*/])
+  }, [/*topTen.length, lastTen.length, allPlayers.length,mensajes.length*/])
 
-  //console.log("yeaa",topTen)
-  //console.log("mimiiir",lastTen)
-  //console.log(allPlayers)
 
-  /*// ULTIMOS 10 JUEGOS
   useEffect(()=>{
     socket.on('lastTidis',mensaje => {
-      //setMensajes([...mensajes,mensaje])
+    if(mensaje.length !== lastTen.length)
       setLastTen(mensaje)
     })
     return () => {socket.off()}
-  },[lastTen])
-  console.log("mimiiir",lastTen)*/
+  },[])
+
+  /*useEffect(()=>{
+    socket.on('allPlayersT',mensaje => {
+      if (mensaje.length !== allPlayers.length)
+      setAllPlayers(mensaje)
+    })
+  },[])*/
 
     return (
       <div>  

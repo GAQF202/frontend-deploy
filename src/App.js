@@ -17,9 +17,9 @@ function App() {
       <Router>
         <Navigate/>
         <Routes>
-          <Route path='/mongo' element={<MongoData/>} />
-          <Route path='/tidb' element={<TidbData/>} />
-          <Route path='/redis' element={<RedisData/>} />
+          <Route path='/front/mongo' element={<MongoData/>} />
+          <Route path='/front/tidb' element={<TidbData/>} />
+          <Route path='/front/redis' element={<RedisData/>} />
         </Routes>
       </Router>
     </div>
